@@ -1,17 +1,15 @@
 
 import "./App.css";
-import NavBar from './components/NavBar';
-import ItemListContainer from './components/ItemListContainer';
+import Header from "./components/Header/Header";
+import Main from "./components/Main/Main";
 
-function App(props) {
+
+function App() {
 
   return (
-    <div>
-      <nav className="header">
-        <NavBar/>
-        <ItemListContainer greeting={'Welcome dear Panda Lover!'}/>
-      </nav>
-      <hr></hr>
+    <div className="background">
+      <Header/>
+      <Main/>
     </div>
   );
 }
