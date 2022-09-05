@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-const ItemCount = ({ stock }) => {
-  const [counter, setCounter] = useState(0);
-  const s = parseInt(stock);
+const ItemCount = ({ stock, initial }) => {
+  const [counter, setCounter] = useState(Number(initial));  
 
   const plus = () => {
     setCounter(counter + 1);
@@ -16,7 +15,7 @@ const ItemCount = ({ stock }) => {
     <div>
       <div className="m-5">
         <button
-          disabled={counter === 0}
+          disabled={counter === Number(initial)}
           onClick={minus}
           className="btn btn-primary rounded"
         >
@@ -24,14 +23,14 @@ const ItemCount = ({ stock }) => {
         </button>
         <strong className="m-2">{counter}</strong>
         <button
-          disabled={counter === s}
+          disabled={counter === Number(stock)}
           onClick={plus}
           className="btn btn-primary rounded"
         >
           +
         </button>
       </div>
-      <button disabled={!(counter > 0)} className="btn btn-primary rounded">
+      <button disabled={counter < Number(initial)} className="btn btn-primary rounded">
         Agregar al carrito
       </button>
     </div>

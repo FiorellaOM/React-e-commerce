@@ -11,7 +11,7 @@ const Item = ({ img, title, description, stock }) => {
           <h2 className="card-title primary">{title}</h2>
           <p>{description}</p>
           <div className="card-actions">
-            <ItemCount stock={stock} />
+            <ItemCount stock={stock} initial="1" />
           </div>
           <p>{stock > 0 ? `Quedan ${stock} unidades!` : "Sin stock :("}</p>
         </div>

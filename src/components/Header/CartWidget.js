@@ -1,5 +1,4 @@
-import "./CartWidget.css"
-import logo from "../../../assets/svg/cart.svg";
+import logo from "../../assets/svg/cart.svg";
 
 const CartWidget = () => {
   return (

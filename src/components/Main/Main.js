@@ -1,11 +1,9 @@
-import Market from "./ClothesMarket/Market";
+
+import ItemListContainer from "./ItemListContainer";
 import "./Main.css";
 
 const Main = () => {
-  return (
-    <nav className="main container">
-      <Market/>
-    </nav>
-  );
+    return <ItemListContainer greeting={'Welcome dear Panda Lover!'} />;
 };
 export default Main;
+

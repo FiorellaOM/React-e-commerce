@@ -1,12 +1,11 @@
-import "./ClothesListContainer.css";
 import { useEffect, useState } from "react";
-import ClothesList from "../ClothesList/ClothesList";
-import clothesJson from "../../../../assets/json/store.json";
-import panda from "../../../../assets/img/panda.png"
+import ItemList from "./ItemList";
+import clothesJson from "../../assets/json/store.json";
+import panda from "../../assets/img/panda.png"
 
-const ClothesListContainer = ({ greeting }) => {
-  const [clothes, setClothes] = useState([]);
-  const getClothes = (data, time) =>
+const ItemListContainer = ({ greeting }) => {
+  const [items, setItems] = useState([]);
+  const getItems = (data, time) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
         if (data) {
@@ -18,9 +17,9 @@ const ClothesListContainer = ({ greeting }) => {
     });
 
   useEffect(() => {
-    getClothes(clothesJson, 1000)
+    getItems(clothesJson, 1000)
       .then((res) => {
-        setClothes(res);
+        setItems(res);
       })
       .catch((err) =>
         console.log(err, "No se pudo recuperar el elemento seleccionado")
@@ -37,8 +36,8 @@ const ClothesListContainer = ({ greeting }) => {
         />
         {greeting}{" "}
       </span>
-      <ClothesList clothes={clothes} />
+      <ItemList items={items} />
     </div>
   );
 };
-export default ClothesListContainer;
+export default ItemListContainer;

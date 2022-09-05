@@ -1,7 +1,0 @@
-.navHead {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-  margin: 1rem;
-  gap: 1.5rem;
-}
