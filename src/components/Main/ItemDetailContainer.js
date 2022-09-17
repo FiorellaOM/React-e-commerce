@@ -8,21 +8,21 @@ const ItemDetailContainer = () => {
   const { slug } = useParams();
 
   useEffect(() => {
-    getItem().then((data) => {
+    getItem(clothesJson, slug).then((data) => {
       if (data) {
         setItem(data);
       }
     });
   }, []);
 
-  const getItem = () => {
+  const getItem = (data, slug) => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(clothesJson.find((p) => p.slug == slug));
+        resolve(data.find((p) => p.slug === slug));
       }, 2000);
     });
   };
 
-  return <ItemDetail item={item} />;
+  return <ItemDetail {...item} />;
 };
 export default ItemDetailContainer;

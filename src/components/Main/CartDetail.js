@@ -1,13 +1,9 @@
 // import { useCartContext } from "../../context/cartContext";
 import ItemCount from "./Item/ItemCount/ItemCount";
 
-const ItemDetail = ({item, title, price, img, description, stock }) => {
+const CartDetail = ({ title, price, img, description, stock }) => {
 
   // const {addItem} = useCartContext()
-
-  /* const onAdd = (item, quantity) => {
-    addItem(item, quantity);
-  } */
 
   return (
     <div className="hero min-h-screen background">
@@ -19,11 +15,11 @@ const ItemDetail = ({item, title, price, img, description, stock }) => {
             {description}
           </p>
           <h3>{price}</h3>
-          <ItemCount stock={stock} initial="1" />
+          <ItemCount stock={stock} initial="1"/>
           <p>{stock > 0 ? `Quedan ${stock} unidades!` : "Sin stock :("}</p>
         </div>
       </div>
     </div>
   );
 };
-export default ItemDetail;
+export default CartDetail;
