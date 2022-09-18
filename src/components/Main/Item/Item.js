@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
-import ItemCount from "./ItemCount/ItemCount";
 
 const Item = ({ img, title, description, slug }) => {
-
   return (
     <Link to={`/shop/item/${slug}`}>
       <section className="flex justify-center">

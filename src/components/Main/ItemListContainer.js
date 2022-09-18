@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import clothesJson from "../../assets/json/store.json";
-import panda from "../../assets/img/panda.png"
+import panda from "../../assets/img/panda.png";
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
@@ -32,7 +32,7 @@ const ItemListContainer = ({ greeting }) => {
         <img
           src={panda}
           alt="Panda Icon"
-          style={{ width: "60px", height: "100", margin: "2rem"}}
+          style={{ width: "60px", height: "100", margin: "2rem" }}
         />
         {greeting}{" "}
       </span>

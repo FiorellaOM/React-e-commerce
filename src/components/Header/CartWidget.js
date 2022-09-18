@@ -1,6 +1,9 @@
 import logo from "../../assets/svg/cart.svg";
+import { useCartContext } from "../../context/cartContext";
 
 const CartWidget = () => {
+  const { currentItems } = useCartContext();
+
   return (
     <div>
       <img
@@ -8,6 +11,7 @@ const CartWidget = () => {
         alt="Shopping Cart"
         style={{ width: "20px", height: "100" }}
       />
+      {currentItems() > 0 && <span>{currentItems()}</span>}
     </div>
   );
 };

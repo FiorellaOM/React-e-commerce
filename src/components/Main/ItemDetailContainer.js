@@ -13,7 +13,7 @@ const ItemDetailContainer = () => {
         setItem(data);
       }
     });
-  }, []);
+  }, [slug]);
 
   const getItem = (data, slug) => {
     return new Promise((resolve) => {
@@ -23,6 +23,6 @@ const ItemDetailContainer = () => {
     });
   };
 
-  return <ItemDetail {...item} />;
+  return <ItemDetail item={item} />;
 };
 export default ItemDetailContainer;

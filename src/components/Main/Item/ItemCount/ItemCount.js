@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ItemCount = ({ stock, initial }) => {
+const ItemCount = ({ stock, initial, onAdd }) => {
   const [counter, setCounter] = useState(Number(initial));
 
   const plus = () => {
@@ -9,12 +9,6 @@ const ItemCount = ({ stock, initial }) => {
 
   const minus = () => {
     setCounter(counter - 1);
-  };
-
-  const onAdd = () => {
-    //console.log(counter);
-    //window.addEventListener("onAdd", onAdd);
-    return counter;
   };
 
   return (
@@ -37,7 +31,7 @@ const ItemCount = ({ stock, initial }) => {
         </button>
       </div>
       <button
-        onClick={onAdd}
+        onClick={() => onAdd(counter)}
         disabled={counter < Number(initial)}
         className="btn btn-primary rounded"
       >

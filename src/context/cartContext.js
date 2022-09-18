@@ -5,51 +5,65 @@ const CartContext = createContext();
 
 export const useCartContext = () => useContext(CartContext);
 
-export const CartContextProvider = ({children}) => {
-  const [product, setProduct] = useState([]);
+export const CartContextProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
 
   const findDuplicate = (product) => {
-    product.some((dup) => dup.slug === product.slug);
+    return products.some((dup) => dup.slug === product.slug);
   };
 
   const addItem = (product, quantity) => {
-    if(findDuplicate(product)) {
-        console.log("Existe")
-    } else { 
-        setProduct((previous)=> previous.concat(product));
+    if (findDuplicate(product)) {
+      console.log("Existe");
+    } else {
+      const cloneProduct = { ...product, quantity };
+      setProducts((previous) => previous.concat(cloneProduct));
     }
   };
 
   const removeItem = (product) => {
-    return setProduct(product.filter(item => item.slug !== product.slug )) 
+    return setProducts(product.filter((item) => item.slug !== product.slug));
   };
 
   const clear = () => {
-    setProduct([]);
+    setProducts([]);
   };
 
-  /* const onCart = () => {
-    const onCart = product.reduce(
-      (counter, product) => (product ? counter + 1 : counter),
+  const currentItems = () => {
+    const current = products.reduce(
+      (acum, product) =>
+        product.quantity > 0 ? acum + product.quantity : acum,
       0
     );
-    return onCart;
+    return current;
   };
-   */
+
   const updateState = (product, state) => {
     const cloneProduct = [...product];
-    const updateProduct = cloneProduct.map((current)=> {
-        if(current.slug === product.slug) {
-            return {...current, state: state ? true : false} 
-        } else {
-            return current;
-        }     
-    }) 
+    const updateProduct = cloneProduct.map((current) => {
+      if (current.slug === product.slug) {
+        return { ...current, state: state ? true : false };
+      } else {
+        return current;
+      }
+    });
 
-    setProduct(updateProduct);
-  }
+    setProducts(updateProduct);
+  };
 
   return (
-    <CartContext.Provider value={{product, findDuplicate, addItem, removeItem, clear, updateState }}>{children}</CartContext.Provider>
+    <CartContext.Provider
+      value={{
+        products,
+        findDuplicate,
+        addItem,
+        removeItem,
+        clear,
+        currentItems,
+        updateState,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 };
