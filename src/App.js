@@ -21,7 +21,7 @@ function App() {
               }
             />
             <Route
-              path="/shop/:id"
+              path="/shop/:param"
               element={
                 <ItemListContainer greeting={"Welcome dear Panda Lover!"} />
               }

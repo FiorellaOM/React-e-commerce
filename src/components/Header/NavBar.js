@@ -7,13 +7,13 @@ const NavBar = () => {
         <NavLink to={'/'}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"./about"}>About us</NavLink>
+        <NavLink to={"./shop/china"}>Born in China</NavLink>
       </li>
       <li>
-        <NavLink to={"./products"}>Our Products</NavLink>
+        <NavLink to={"./shop/myanmar"}>Born in Myanmar</NavLink>
       </li>
       <li>
-        <NavLink to={"./pandas"}>Pick your Panda</NavLink>
+        <NavLink to={"./shop/vietnam"}>Born in Vietnam</NavLink>
       </li>
       <li>
         <NavLink to={"./contact"}>Contact us</NavLink>

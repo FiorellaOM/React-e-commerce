@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import clothesJson from "../../assets/json/store.json";
 import panda from "../../assets/img/panda.png";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
+  const { param } = useParams();
+
   const getItems = (data, time) =>
     new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -16,15 +19,22 @@ const ItemListContainer = ({ greeting }) => {
       }, time);
     });
 
+  const filterItems = (data, param) => {
+    const filteredData = data.filter(
+      (panda) => panda.birthplace.toUpperCase() === param.toUpperCase()
+    );
+    setItems(filteredData);
+  };
+
   useEffect(() => {
     getItems(clothesJson, 1000)
       .then((res) => {
-        setItems(res);
+        param ? filterItems(res, param) : setItems(res);
       })
       .catch((err) =>
         console.log(err, "No se pudo recuperar el elemento seleccionado")
       );
-  }, []);
+  }, [param]);
 
   return (
     <div className="container">

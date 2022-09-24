@@ -6,6 +6,7 @@
             "price": "600 USD",
             "img": "https://i.postimg.cc/HWNff1VZ/ron.jpg",
             "stock":"7",
+            "birthplace":"China",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -15,6 +16,7 @@
             "price": "320 USD",
             "img": "https://i.postimg.cc/D03YwnLn/images.jpg",
             "stock":"4",
+            "birthplace":"Myanmar",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -24,6 +26,7 @@
             "price": "510 USD",
             "img": "https://i.postimg.cc/wvphtvff/2.jpg",
             "stock":"9",
+            "birthplace":"China",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -33,6 +36,7 @@
             "price": "200 USD",
             "img": "https://i.postimg.cc/Wp0Hfqc3/images-2.jpg",
             "stock":"3",
+            "birthplace":"China",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -42,6 +46,7 @@
             "price": "150 USD",
             "img": "https://i.postimg.cc/02FKMjrY/images-1.jpg",
             "stock":"5",
+            "birthplace":"Vietnam",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -51,6 +56,7 @@
             "price": "200 USD",
             "img": "https://i.postimg.cc/Ghcq7Mj7/images-3.jpg",
             "stock":"1",
+            "birthplace":"Vietnam",
             "description":"Lorem ipsum dolor sit amet"
         },
         {
@@ -60,6 +66,7 @@
             "price": "1200 USD",
             "img": "https://i.postimg.cc/bwmM9Xc9/J4-TSZIY6-I5-BDREEXRWRMV6-TLDU.jpg",
             "stock":"1",
+            "birthplace":"China",
             "description":"Lorem ipsum dolor sit amet"
         }
     ]

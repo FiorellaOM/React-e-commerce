@@ -14,7 +14,12 @@ export const CartContextProvider = ({ children }) => {
 
   const addItem = (product, quantity) => {
     if (findDuplicate(product)) {
-      console.log("Existe");
+      const cloneProduct = [...products];
+      cloneProduct.map((current) =>
+        current.slug === product.slug
+          ? { ...current, quantity: current.quantity + quantity }
+          : current
+      );
     } else {
       const cloneProduct = { ...product, quantity };
       setProducts((previous) => previous.concat(cloneProduct));
@@ -22,7 +27,7 @@ export const CartContextProvider = ({ children }) => {
   };
 
   const removeItem = (product) => {
-    return setProducts(product.filter((item) => item.slug !== product.slug));
+    return setProducts(products.filter((item) => item.slug !== product.slug));
   };
 
   const clear = () => {
@@ -38,7 +43,7 @@ export const CartContextProvider = ({ children }) => {
     return current;
   };
 
-  const updateState = (product, state) => {
+  /* const updateState = (product, state) => {
     const cloneProduct = [...product];
     const updateProduct = cloneProduct.map((current) => {
       if (current.slug === product.slug) {
@@ -49,7 +54,7 @@ export const CartContextProvider = ({ children }) => {
     });
 
     setProducts(updateProduct);
-  };
+  }; */
 
   return (
     <CartContext.Provider
@@ -60,7 +65,6 @@ export const CartContextProvider = ({ children }) => {
         removeItem,
         clear,
         currentItems,
-        updateState,
       }}
     >
       {children}
