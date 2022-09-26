@@ -15,19 +15,32 @@ export const CartContextProvider = ({ children }) => {
   const addItem = (product, quantity) => {
     if (findDuplicate(product)) {
       const cloneProduct = [...products];
-      cloneProduct.map((current) =>
+      const updatedProducts = cloneProduct.map((current) =>
         current.slug === product.slug
           ? { ...current, quantity: current.quantity + quantity }
           : current
       );
+      setProducts(updatedProducts);
     } else {
       const cloneProduct = { ...product, quantity };
       setProducts((previous) => previous.concat(cloneProduct));
     }
   };
 
+  const substractItem = (product) => {
+    if (findDuplicate(product)) {
+      const cloneProduct = [...products];
+      const updatedProducts = cloneProduct.map((current) =>
+        current.slug === product.slug
+          ? { ...current, quantity: current.quantity - 1 }
+          : current
+      );
+      setProducts(updatedProducts);
+    }
+  };
+
   const removeItem = (product) => {
-    return setProducts(products.filter((item) => item.slug !== product.slug));
+    setProducts(products.filter((item) => item.slug !== product.slug));
   };
 
   const clear = () => {
@@ -43,25 +56,13 @@ export const CartContextProvider = ({ children }) => {
     return current;
   };
 
-  /* const updateState = (product, state) => {
-    const cloneProduct = [...product];
-    const updateProduct = cloneProduct.map((current) => {
-      if (current.slug === product.slug) {
-        return { ...current, state: state ? true : false };
-      } else {
-        return current;
-      }
-    });
-
-    setProducts(updateProduct);
-  }; */
-
   return (
     <CartContext.Provider
       value={{
         products,
         findDuplicate,
         addItem,
+        substractItem,
         removeItem,
         clear,
         currentItems,

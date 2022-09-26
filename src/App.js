@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
-import CartDetail from "./components/Main/CartDetail";
+import Cart from "./components/Main/Cart";
 import ItemDetailContainer from "./components/Main/ItemDetailContainer";
 import ItemListContainer from "./components/Main/ItemListContainer";
 import { CartContextProvider } from "./context/cartContext";
@@ -27,7 +27,7 @@ function App() {
               }
             />
             <Route path="/shop/item/:slug" element={<ItemDetailContainer />} />
-            <Route path="/cart" element={<CartDetail />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

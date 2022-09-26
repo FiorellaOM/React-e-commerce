@@ -4,7 +4,7 @@ const Item = ({ img, title, description, slug }) => {
   return (
     <Link to={`/shop/item/${slug}`}>
       <section className="flex justify-center">
-        <div className="card w-80 bg-info shadow-xs">
+        <div className="card w-96 bg-base-100 shadow-m">
           <figure className="px-10 pt-10">
             <img src={img} alt={title} className="rounded-xl" />
           </figure>

@@ -1,0 +1,90 @@
+import "./Cart.css";
+import { Link } from "react-router-dom";
+import { useCartContext } from "../../context/cartContext";
+
+const Cart = () => {
+  const { products, addItem, substractItem, removeItem } = useCartContext();
+  // const [totalCost, setTotalCost] = useState();
+
+  const plus = (product) => {
+    addItem(product, 1);
+  };
+
+  const minus = (product) => {
+    substractItem(product);
+  };
+
+  const remove = (product) => {
+    removeItem(product);
+  };
+
+  const calculateTotal = () => {
+    let sum = 0;
+    products.forEach((product) => {
+      sum = sum + parseInt(product.price.split("USD")) * product.quantity;
+    });
+    return sum;
+  };
+
+  return (
+    <div className="background">
+      {products.length ? (
+        products.map((product) => {
+          return (
+            <div>
+              <div className="cartProduct">
+                <div className="avatar flex-none">
+                  <div className="w-24 rounded-full">
+                    <img
+                      className="avatar rounded-full"
+                      src={product.img}
+                      alt={product.title}
+                    />
+                  </div>
+                </div>
+                <div className="flex-auto">
+                  <h3 className="text-lg">{product.title}</h3>
+                  <div className="flex-auto productData">
+                    <button
+                      className="flex-none btn btn-circle btn-outline"
+                      onClick={() => minus(product)}
+                    >
+                      -
+                    </button>
+                    <span className="flex-none">{product.quantity}</span>
+                    <button
+                      className="flex-none btn btn-circle btn-outline"
+                      onClick={() => plus(product)}
+                    >
+                      +
+                    </button>
+                    <span>
+                      {parseInt(product.price.split("USD")) * product.quantity +
+                        " USD"}
+                    </span>
+                    <button
+                      className="flex-none btn btn-circle btn-outline"
+                      onClick={() => remove(product)}
+                    >
+                      X
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr className="mt-4 mb-4 border-primary"></hr>
+            </div>
+          );
+        })
+      ) : (
+        <div className="m-4">
+          <p className="text-lg	m-4">The cart is empty</p>
+          <Link className="btn btn-primary" to={"/"}>
+            Go back
+          </Link>
+        </div>
+      )}
+      <span className="text-lg	m-4">Total: {calculateTotal()} USD</span>
+    </div>
+  );
+};
+export default Cart;
