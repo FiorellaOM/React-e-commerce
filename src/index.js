@@ -11,6 +11,14 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
+
+  /* apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId, */
+
   apiKey: "AIzaSyA3TofFmkH_KLe8RU2zmsVvtnZZw61leiA",
   authDomain: "react-e-commerce-fiorellaom.firebaseapp.com",
   projectId: "react-e-commerce-fiorellaom",
@@ -19,8 +27,10 @@ const firebaseConfig = {
   appId: "1:915669878282:web:fc37d2459b9cad9e7901f3"
 };
 
+
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

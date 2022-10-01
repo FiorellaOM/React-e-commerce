@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useCartContext } from "../../context/cartContext";
 
 const Cart = () => {
-  const { products, addItem, substractItem, removeItem } = useCartContext();
-  // const [totalCost, setTotalCost] = useState();
+  const { products, addItem, substractItem, removeItem, clear } =
+    useCartContext();
 
   const plus = (product) => {
     addItem(product, 1);
@@ -18,6 +18,10 @@ const Cart = () => {
     removeItem(product);
   };
 
+  const clearCart = () => {
+    clear();
+  };
+
   const calculateTotal = () => {
     let sum = 0;
     products.forEach((product) => {
@@ -28,6 +32,11 @@ const Cart = () => {
 
   return (
     <div className="background">
+      <div className="flex flex-row justify-between m-5">
+        <h3 className="title text-2xl font-bold">Cart</h3>
+        <button className="italic" onClick={() => clearCart()}>Clear cart</button>
+      </div>
+      <hr className="mt-4 mb-4 border-primary"></hr>
       {products.length ? (
         products.map((product) => {
           return (

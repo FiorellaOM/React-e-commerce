@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ItemDetail from "./ItemDetail";
-import clothesJson from "../../assets/json/store.json";
+import {
+  collection,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+} from "firebase/firestore";
 
 const ItemDetailContainer = () => {
   const [item, setItem] = useState({});
   const { slug } = useParams();
 
   useEffect(() => {
-    getItem(clothesJson, slug).then((data) => {
-      if (data) {
-        setItem(data);
-      }
-    });
+    getItem(slug);
   }, [slug]);
 
-  const getItem = (data, slug) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(data.find((p) => p.slug === slug));
-      }, 2000);
+  const getItem = (param) => {
+    const db = getFirestore();
+    const filteredQuery = query(
+      collection(db, "pandas"),
+      where("slug", "==", param)
+    );
+
+    getDocs(filteredQuery).then((snapshot) => {
+      if (snapshot.size === 0) console.log("no pandas found :(");
+      const res = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setItem(res[0]);
     });
   };
 

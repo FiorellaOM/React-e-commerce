@@ -1,39 +1,39 @@
 import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
-import clothesJson from "../../assets/json/store.json";
 import panda from "../../assets/img/panda.png";
 import { useParams } from "react-router-dom";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 
 const ItemListContainer = ({ greeting }) => {
   const [items, setItems] = useState([]);
   const { param } = useParams();
 
-  const getItems = (data, time) =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (data) {
-          resolve(data);
-        } else {
-          reject("Error");
-        }
-      }, time);
+  const getItems = () => {
+    const db = getFirestore();
+    const itemCollection = collection(db, "pandas");
+    getDocs(itemCollection).then((snapshot) => {
+      const res = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setItems(res);
     });
+  };
 
-  const filterItems = (data, param) => {
-    const filteredData = data.filter(
-      (panda) => panda.birthplace.toUpperCase() === param.toUpperCase()
+  const filterItems = (param) => {
+    const db = getFirestore();
+    const filteredQuery = query(
+      collection(db, "pandas"),
+      where('birthplace', '==', param.toUpperCase())
     );
-    setItems(filteredData);
+
+    getDocs(filteredQuery).then((snapshot) => {
+    if(snapshot.size === 0) console.log("no pandas found :(");
+      const res = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
+      setItems(res);
+    });
+    
   };
 
   useEffect(() => {
-    getItems(clothesJson, 1000)
-      .then((res) => {
-        param ? filterItems(res, param) : setItems(res);
-      })
-      .catch((err) =>
-        console.log(err, "No se pudo recuperar el elemento seleccionado")
-      );
+    param ? filterItems(param) : getItems();
   }, [param]);
 
   return (
