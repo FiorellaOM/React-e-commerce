@@ -70,7 +70,7 @@ const Cart = () => {
           return (
             <div>
               <div className="cartProduct">
-                <div className="avatar flex-none">
+                <div className="avatar flex-none mx-10">
                   <div className="w-24 rounded-full">
                     <img
                       className="avatar rounded-full"
@@ -83,14 +83,14 @@ const Cart = () => {
                   <h3 className="text-lg">{product.title}</h3>
                   <div className="flex-auto productData">
                     <button
-                      className="flex-none btn btn-circle btn-outline"
+                      className="flex-none btn  btn-primary"
                       onClick={() => minus(product)}
                     >
                       -
                     </button>
                     <span className="flex-none">{product.quantity}</span>
                     <button
-                      className="flex-none btn btn-circle btn-outline"
+                      className="flex-none btn btn-primary"
                       onClick={() => plus(product)}
                     >
                       +
@@ -100,7 +100,7 @@ const Cart = () => {
                         " USD"}
                     </span>
                     <button
-                      className="flex-none btn btn-circle btn-outline"
+                      className="flex-none btn  btn-primary"
                       onClick={() => remove(product)}
                     >
                       X
@@ -120,8 +120,8 @@ const Cart = () => {
           </Link>
         </div>
       )}
-      <span className="text-lg	m-4">Total: {total} USD</span>
-      <Order items={orderItems} total={total}></Order>
+      <span className="text-2xl text-secondary m-10">Total: {total} USD</span>
+      <Order items={orderItems} key={orderItems.id} total={total}></Order>
     </div>
   );
 };

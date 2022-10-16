@@ -1,24 +1,19 @@
 import { NavLink } from "react-router-dom";
+import CartWidget from "./CartWidget";
 
 const NavBar = () => {
   return (
-    <ul className="navHead">
-      <li>
-        <NavLink to={'/'}>Home</NavLink>
-      </li>
-      <li>
-        <NavLink to={"./shop/china"}>Born in China</NavLink>
-      </li>
-      <li>
-        <NavLink to={"./shop/myanmar"}>Born in Myanmar</NavLink>
-      </li>
-      <li>
-        <NavLink to={"./shop/vietnam"}>Born in Vietnam</NavLink>
-      </li>
-      <li>
-        <NavLink to={"./contact"}>Contact us</NavLink>
-      </li>
-    </ul>
+    <div className="flex flex-row align-middle items-center gap-3">
+      <ul className="flex flex-row gap-5">
+        <li className="font-bold text-primary text-md ">
+          <NavLink to={"/"}>Store</NavLink>
+        </li>
+        <li className="font-bold text-primary text-md ">
+          <NavLink to={"./aboutus"}>About us</NavLink>
+        </li>
+      </ul>
+      <CartWidget />
+    </div>
   );
 };
 export default NavBar;

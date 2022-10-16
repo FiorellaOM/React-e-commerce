@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import Swal from "sweetalert2";
 import ItemDetail from "./ItemDetail";
-import {
-  collection,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
+import Spinner from "./Spinner";
 
 const ItemDetailContainer = () => {
   const [item, setItem] = useState({});
@@ -19,18 +15,25 @@ const ItemDetailContainer = () => {
 
   const getItem = (param) => {
     const db = getFirestore();
-    const filteredQuery = query(
-      collection(db, "pandas"),
-      where("slug", "==", param)
-    );
+    const ref = doc(db, "pandas", param.toString());
 
-    getDocs(filteredQuery).then((snapshot) => {
-      if (snapshot.size === 0) console.log("no pandas found :(");
-      const res = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-      setItem(res[0]);
+    getDoc(ref).then((snapshot) => {
+      if (snapshot.exists()) {
+        setItem({ id: snapshot.id, ...snapshot.data() });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "No pandas were found :(",
+          confirmButtonText: "Sad..",
+          background: "#E2E1CA",
+          color: "black",
+          confirmButtonColor: "#97EAB9",
+        }).then(function () {
+          window.location = "/";
+        });
+      }
     });
   };
-
-  return <ItemDetail item={item} />;
+  return item.id ? <ItemDetail item={item} key={item.id} /> : <Spinner />;
 };
 export default ItemDetailContainer;

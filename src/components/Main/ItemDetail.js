@@ -14,7 +14,7 @@ const ItemDetail = ({ item }) => {
 
   return (
     <div className="hero min-h-screen background">
-      <div className="hero-content flex-col lg:flex-row">
+      <div className="hero-content gap-x-20 flex-col lg:flex-row">
         <img
           src={item.img}
           alt="Item"
@@ -23,15 +23,15 @@ const ItemDetail = ({ item }) => {
         <div>
           <h1 className="text-5xl font-bold">{item.title}</h1>
           <p className="py-6">{item.description}</p>
-          <h3>{item.price}</h3>
+          <h3 className="text-xl text-secondary">{item.price}</h3>
           {addedItems > 0 ? (
-            <Link className="btn btn-primary rounded" to={"/cart"}>
+            <Link className="btn btn-primary rounded my-10" to={"/cart"}>
               Go to cart...
             </Link>
           ) : (
             <ItemCount stock={item.stock} initial="1" onAdd={onAdd} />
           )}
-          {item.stock && !addedItems && <p> {item.stock} units left!</p>}
+          {item.stock && !addedItems && <p className="text-md italic"> {item.stock} cuties left!</p>}
         </div>
       </div>
     </div>

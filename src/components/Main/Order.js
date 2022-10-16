@@ -1,7 +1,10 @@
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { useCartContext } from "../../context/cartContext";
 
 const Order = (orderedItems) => {
+  const { clear } = useCartContext();
   const [buyer, setBuyer] = useState({
     name: "",
     phone: "",
@@ -47,7 +50,17 @@ const Order = (orderedItems) => {
       const orderCollection = collection(db, "orders");
       addDoc(orderCollection, order)
         .then(({ id }) => {
-          console.log("Success", id);
+          Swal.fire({
+            title: "Success!",
+            text: "The purchase was completed!",
+            confirmButtonText: "Nice",
+            background: "#E2E1CA",
+            color: "black",
+            confirmButtonColor:"#97EAB9"
+          }).then(function () {
+            window.location = "/panda";
+          });
+          clear();
         })
         .catch((error) => {
           console.log("error");
@@ -57,7 +70,7 @@ const Order = (orderedItems) => {
 
   return (
     <div className="background">
-      <label htmlFor="confirmModal" className="btn modal-button">
+      <label htmlFor="confirmModal" className="btn modal-button m-5">
         Confirm Purchase
       </label>
 
@@ -87,7 +100,11 @@ const Order = (orderedItems) => {
               className="input input-bordered input-primary w-full max-w-xs m-3"
               onChange={handleInputChange}
             />
-            <button type="submit" value="Submit" className="btn">
+            <button
+              type="submit"
+              value="Submit"
+              className="btn btn-primary m-10"
+            >
               Complete purchase!
             </button>
           </form>
